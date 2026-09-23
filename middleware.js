@@ -1,5 +1,3 @@
-import { NextResponse } from '@vercel/edge';
-
 const TARGET_HOST = 'https://disotakyu.bunzhida.xyz';
 
 const RULES = [
@@ -71,7 +69,7 @@ export default function middleware(request) {
     }
 
     const destination = `${TARGET_HOST}${targetPath}${targetQueryString}`;
-    return NextResponse.redirect(destination, 307);
+    return Response.redirect(destination, 307);
 }
 
 export const config = {
