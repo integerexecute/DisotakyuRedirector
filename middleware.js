@@ -1,4 +1,5 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from '@vercel/edge';
+
 const TARGET_HOST = 'https://disotakyu.bunzhida.xyz';
 
 const RULES = [
@@ -49,13 +50,13 @@ const RULES = [
     }
 ];
 
-export function middleware(request) {
+export default function middleware(request) {
     const url = new URL(request.url);
     const pathname = url.pathname;
     const searchParams = url.searchParams;
 
     let targetPath = pathname;
-    let targetQueryString = url.search; // Default to preserving all query parameters
+    let targetQueryString = url.search;
 
     for (const rule of RULES) {
         const match = pathname.match(rule.pattern);
